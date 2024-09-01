@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio de Sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+        .header-img {
+            width: 100%;
+            height: 300px; /* Puedes ajustar la altura según prefieras */
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5hmVlCpxVHppvaKqKl-LfYIjBBqBkY_ViOxS1XD6vWyJvyKQXp4X4hsRAgK_63recJZkFi9beqVW4MWyB-YncmIhzEAARNhR9xiGBoCd8-_J72vQHITcBVSrx11s3dsJNJ70U8qjFa5AX/s640/168-+Agroindustrias+AIB+SA.jpg'); /* Reemplaza esta URL con la de tu imagen */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+        }
+        h2 {
+            margin: 20px 0;
+        }
+        .form-group {
+            margin: 10px 0;
+            max-width: 300px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            max-width: 300px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+        #countdown {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-img"></div>
+
+    <h2>Inicio de Sesión</h2>
+
+    <div class="form-group">
+        <label for="userId">Usuario:</label>
+        <input type="text" id="userId" placeholder="Ingresa tu ID">
+    </div>
+    <div class="form-group">
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" placeholder="Ingresa tu contraseña">
+    </div>
+    <button id="loginButton" onclick="validateLogin()">Ingresar</button>
+    <p class="error-message" id="errorMessage">ID o contraseña incorrectos</p>
+    <p id="countdown"></p>
+
+    <script>
+        let failedAttempts = 0;
+        let lockoutTimer;
+        let isLockedOut = false;
+
+        function validateLogin() {
+            const userId = document.getElementById("userId").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("errorMessage");
+            const countdownElement = document.getElementById("countdown");
+            const loginButton = document.getElementById("loginButton");
+
+            if (isLockedOut) {
+                // Ignore login attempts while locked out
+                return;
+            }
+
+            if (userId === "jhon" && password === "jhon123") {
+                // Redirect to dashboard page
+                window.location.href = 'dashboard.html';
+            } else {
+                failedAttempts++;
+                
+                if (failedAttempts > 2) {
+                    errorMessage.innerHTML = "ID o contraseña incorrectos. Espere 30 segundos...";
+                    errorMessage.style.display = "block";
+                    countdownElement.style.display = "block";
+                    loginButton.disabled = true; // Disable the button
+                    startCountdown(30);
+                } else {
+                    errorMessage.innerHTML = "ID o contraseña incorrectos";
+                    errorMessage.style.display = "block";
+                }
+            }
+        }
+
+        function startCountdown(seconds) {
+            let timeLeft = seconds;
+            const countdownElement = document.getElementById("countdown");
+
+            lockoutTimer = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(lockoutTimer);
+                    document.getElementById("errorMessage").style.display = "none";
+                    countdownElement.style.display = "none";
+                    document.getElementById("loginButton").disabled = false; // Re-enable the button
+                    isLockedOut = false;
+                } else {
+                    countdownElement.innerHTML = `Espere ${timeLeft} segundos...`;
+                    timeLeft--;
+                }
+            }, 1000);
+            isLockedOut = true; // Set lockout status
+        }
+    </script>
+
+</body>
+</html>

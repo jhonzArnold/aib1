@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            overflow: hidden; /* Evita barras de desplazamiento si es necesario */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header-img {
+            width: 100vw; /* Ocupa el ancho completo de la ventana del navegador */
+            height: 300px; /* Ajusta la altura según prefieras */
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5hmVlCpxVHppvaKqKl-LfYIjBBqBkY_ViOxS1XD6vWyJvyKQXp4X4hsRAgK_63recJZkFi9beqVW4MWyB-YncmIhzEAARNhR9xiGBoCd8-_J72vQHITcBVSrx11s3dsJNJ70U8qjFa5AX/s640/168-+Agroindustrias+AIB+SA.jpg'); /* Reemplaza esta URL con la de tu imagen */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+        }
+        .left-img-container {
+            position: absolute;
+            top: calc(300px + 80px); /* Espacio debajo de la imagen principal */
+            left: 20px; /* Espacio desde el borde izquierdo */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Alinea el contenido al borde izquierdo del contenedor */
+        }
+        .left-img-title {
+            font-size: 18px;
+            color: #333;
+            text-align: left;
+            margin-bottom: 10px; /* Espacio entre el título y la imagen */
+            margin-left: 60px; /* Ajusta este valor para mover el título más a la derecha */
+        }
+        .left-img {
+            width: 150px; /* Ajusta el ancho de la imagen según prefieras */
+            height: auto;
+        }
+        h2 {
+            margin: 20px 0;
+            font-size: 24px;
+            color: #333;
+            text-align: center; /* Centra el texto debajo de la imagen principal */
+        }
+    </style>
+</head>
+<body>
+    <div class="header-img"></div>
+    <h2>Temperatura en tiempo real</h2>
+    <div class="left-img-container">
+        <div class="left-img-title">Temp. Cámara de congelado</div>
+        <img src="https://liderfm90.com.br/uploads/images/2023/06/image_750x_649ad9090fd59.jpg" alt="Imagen Lateral" class="left-img">
+    </div>
+</body>
+</html>
